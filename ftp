@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+from termcolor import colored
+from sys import argv, exit
+from scapy.all import *
+import re
+
+def Error(message):
+    print(colored("[", "white", ) + colored("!", 'red', ) + colored("] ", "white", ) + colored(message, "white",  ))
+
+def Info(message):
+    print(colored("[", "white",  ) + colored("*", 'yellow', ) + colored("] ", "white", ) + colored(message, "white", ))
+
+def Good(message):
+    print(colored("[", "white", ) + colored("+", 'cyan', ) + colored("] ", "white", ) + colored(message, "white", ))
+
+def getPath():
+    if len(argv) == 1:
+        Error("Usage : ./ftp <.pcap file>")
+        Info("Example : ./ftp capture.pcapng")
+        exit()
+
+    else:
+        if argv[1] in ["-h", "--help", "-help", "help"]:
+            Info("Usage : ./ftp <.pcap file>")
+            Info("Example : ./ftp capture.pcapng")
+            exit()
+        else:
+            return syargv[1]
+
+
+def parseFTP(capture):
+
+    for i in range(0,len(capture)):
+        try:
+            ip = capture[i].getlayer(IP).dst
+        except:
+            ip = "None"
+
+        raw = capture[i].sprintf('%Raw.load%')
+        user = re.findall("(?i)USER (.*)", raw)
+        pasw = re.findall("(?i)PASS (.*)", raw)
+
+        if user:
+            Info(f"FTP login to {ip}")
+            Good(f"Username found : " + user[0].replace("\\r\\n'", ""))
+        if pasw: 
+            Info(f"FTP login to {ip}")
+            Good("Password found : " + pasw[0].replace("\\r\\n'", ""))
+
+
+def main():
+    pkt = getPath()
+
+    Info("Opening capture file ...")
+    try:
+        capture = rdpcap(pkt)
+    except:
+        Error("Cannot open the file")
+        exit()
+    Info("Parsing file ...")
+    print("")
+
+    parseFTP(capture)
+
+
+if __name__ == "__main__":
+    main()
