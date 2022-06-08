@@ -2,7 +2,7 @@
 
 This is a simple python3 parser. His goal is to find FTP creds in .pcap files. 
 
-# How i install ?
+# How to install
 
 ```
 # dependecies :
