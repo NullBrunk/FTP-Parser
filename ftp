@@ -49,7 +49,6 @@ def parseFTP(capture):
             Info(f"FTP login to {ip}")
             Good(f"Username found : " + user[0].replace("\\r\\n'", ""))
         if pasw: 
-            Info(f"FTP login to {ip}")
             Good("Password found : " + pasw[0].replace("\\r\\n'", ""))
 
 
