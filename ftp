@@ -23,7 +23,7 @@ def getPath():
     else:
         if argv[1] in ["-h", "--help", "-help", "help"]:
             Info("Usage : ./ftp <.pcap file>")
-            Info("Example : ./ftp capture.pcapng")
+            Info("Example : ./ftp capture.pcap")
             exit()
         else:
             return argv[1]
