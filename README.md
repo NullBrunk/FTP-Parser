@@ -18,8 +18,8 @@ cd ftp-parser && chmod +x ftp
 ```
 
 # How to use 
+![Capture d'écran Deepin_zone de sélection _20220608171120](https://user-images.githubusercontent.com/106782577/172652764-77ef81f8-a54c-4916-90c1-d8beccce93f9.png)
 
-![Capture d'écran Deepin_zone de sélection _20220608170246](https://user-images.githubusercontent.com/106782577/172651729-19206b68-34db-4b66-b469-6ff31d89762e.png)
 
 # Example
 
