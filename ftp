@@ -6,13 +6,13 @@ from scapy.all import *
 import re
 
 def Error(message):
-    print(colored("[", "white", ) + colored("!", 'red', ) + colored("] ", "white", ) + colored(message, "white",  ))
+    print(colored("[", "white", attrs=['bold']) + colored("!", 'red', attrs=['bold']) + colored("] ", "white", attrs=['bold']) + colored(message, "white", attrs=['bold'] ))
 
 def Info(message):
-    print(colored("[", "white",  ) + colored("*", 'yellow', ) + colored("] ", "white", ) + colored(message, "white", ))
+    print(colored("[", "white",  attrs=['bold']) + colored("*", 'yellow', attrs=['bold']) + colored("] ", "white", attrs=['bold']) + colored(message, "white", attrs=['bold']))
 
 def Good(message):
-    print(colored("[", "white", ) + colored("+", 'cyan', ) + colored("] ", "white", ) + colored(message, "white", ))
+    print(colored("[", "white", attrs=['bold']) + colored("+", 'cyan', attrs=['bold']) + colored("] ", "white", attrs=['bold']) + colored(message, "white", attrs=['bold']))
 
 def getPath():
     if len(argv) == 1:
@@ -26,10 +26,12 @@ def getPath():
             Info("Example : ./ftp capture.pcapng")
             exit()
         else:
-            return syargv[1]
+            return argv[1]
 
 
 def parseFTP(capture):
+
+    nb = 0
 
     for i in range(0,len(capture)):
         try:
@@ -42,6 +44,8 @@ def parseFTP(capture):
         pasw = re.findall("(?i)PASS (.*)", raw)
 
         if user:
+            nb += 1
+            print("\n" + "------" ,nb , "\n")
             Info(f"FTP login to {ip}")
             Good(f"Username found : " + user[0].replace("\\r\\n'", ""))
         if pasw: 
@@ -52,6 +56,7 @@ def parseFTP(capture):
 def main():
     pkt = getPath()
 
+    print("")
     Info("Opening capture file ...")
     try:
         capture = rdpcap(pkt)
