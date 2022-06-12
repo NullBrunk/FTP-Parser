@@ -1,6 +1,6 @@
 # FTP parser
 
-This is a simple python3 parser. His goal is to find FTP creds in .pcap files. 
+Parse .pcap file searching for FTP credentials
 
 
 # How to install ?
@@ -10,8 +10,8 @@ This is a simple python3 parser. His goal is to find FTP creds in .pcap files.
 pip3 install termcolor scapy
 
 # git cloning :
-git clone https://github.com/NullBrunk/ftp-parser/
-cd ftp-parser && chmod +x ftp
+git clone https://github.com/NullBrunk/FTP-Parser/
+cd FTP-Parser && chmod +x ftp
 
 # help
 ./ftp -h
